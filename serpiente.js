@@ -16,6 +16,8 @@
       x: 10,
       y: 10
     };
+    let puntaje = 0;
+
     generarComida();
     // Primera pintura del juego al cargar la página
     dibujarTodo();
@@ -56,37 +58,60 @@
 
 }
 
-function  pintarParte(lineaX, lineaY){
-  const posicionX= lineaX * TAMANIO_CELDA;
-  const posicionY= lineaY * TAMANIO_CELDA;
-  ctx.fillStyle= "color";
-  ctx.fillRect(posicionX, posicionY, TAMANIO_CELDA, TAMANIO_CELDA);
+function pintarParte(lineaX, lineaY, color) {
+
+  const posicionX = lineaX * TAMANIO_CELDA;
+  const posicionY = lineaY * TAMANIO_CELDA;
+
+  ctx.fillStyle = color;
+
+  ctx.fillRect(
+    posicionX,
+    posicionY,
+    TAMANIO_CELDA,
+    TAMANIO_CELDA
+  );
+
   ctx.strokeStyle = "black";
-  ctx.strokeRect(posicionX, posicionY, TAMANIO_CELDA, TAMANIO_CELDA);
+
+  ctx.strokeRect(
+    posicionX,
+    posicionY,
+    TAMANIO_CELDA,
+    TAMANIO_CELDA
+  );
+
 }
 
 function pintarSerpiente() {
 
   for(let i = 0; i < serpiente.length; i++) {
     const parte = serpiente[i];
-    // Cabeza
     if(i === 0) {
-      ctx.fillStyle = "yellow";
+      pintarParte(parte.x, parte.y, "yellow");
     } else {
-      ctx.fillStyle = "red";
+      pintarParte(parte.x, parte.y, "red");
     }
-    pintarParte(parte.x, parte.y);
-
   }
-
 }
-
+function pintarComida() {
+  pintarParte(comida.x, comida.y, "orange");
+}
 function generarComida(){
   const totalColumnas = canvas.width / TAMANIO_CELDA;
   const totalFilas = canvas.height/ TAMANIO_CELDA;
   comida.x= Math.floor(Math.random ()* totalColumnas);
   comida.y= Math.floor(Math.random ()* totalFilas);
 
+}
+
+function atrapaComida() {
+  const cabeza = serpiente[0];
+  if( cabeza.x === comida.x &&cabeza.y === comida.y)
+    {
+    return true;
+  }
+  return false;
 }
 
 function moverDerecha(){
@@ -137,12 +162,13 @@ function moverSerpiente() {
 }
   dibujarTodo();
 }
+
 function iniciarJuego(){
  intervaloSerpiente=setInterval(moverSerpiente, 1000);
 }
+
 function pausarJuego() {
   clearInterval(intervaloSerpiente);
-
 }
 
 function cambiarDireccion(direccion) {
@@ -154,9 +180,13 @@ function dibujarTodo() {
 
   dibujarTablero();
 
+  pintarComida();
+
   pintarSerpiente();
-  
-  generarComida();
+
 }
 
+function reiniciarJuego() {
+  location.reload();
+}
 
