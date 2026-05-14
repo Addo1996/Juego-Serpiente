@@ -46,9 +46,20 @@
 
 }
 
+function  pintarParte(lineaX, lineaY){
+  const posicionX= lineaX * TAMANIO_CELDA;
+  const posicionY= lineaY * TAMANIO_CELDA;
+  ctx.fillStyle= "lime";
+  ctx.fillRect(posicionX, posicionY, TAMANIO_CELDA, TAMANIO_CELDA);
+  ctx.strokeStyle = "black";
+  ctx.strokeRect(posicionX, posicionY, TAMANIO_CELDA, TAMANIO_CELDA);
+}
+
     function dibujarTodo() {
       limpiarCanvas();
       dibujarTablero();
+      pintarParte(5, 5);
+      pintarParte(10, 2);
     }
 
 
