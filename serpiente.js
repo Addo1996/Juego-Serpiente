@@ -114,52 +114,61 @@ function atrapaComida() {
   return false;
 }
 
-function moverDerecha(){
-  const cabeza= serpiente[0];
-  const nuevaCabeza= {x: cabeza.x +1, y: cabeza.y};
+function moverDerecha(crecer = false){
+  const cabeza = serpiente[0];
+  const nuevaCabeza = {x: cabeza.x + 1, y: cabeza.y };
   serpiente.unshift(nuevaCabeza);
-  serpiente.pop();
+  if(!crecer){
+    serpiente.pop();
+  }
 }
 
-function moverIzquierda(){
+function moverIzquierda(crecer = false){
   const cabeza= serpiente[0];
   const nuevaCabeza= {x: cabeza.x -1, y: cabeza.y};
   serpiente.unshift(nuevaCabeza);
-  serpiente.pop();
+  if(!crecer){
+    serpiente.pop();
+  }
 }
 
-function moverArriba(){
+function moverArriba(crecer = false){
   const cabeza= serpiente[0];
   const nuevaCabeza= {x: cabeza.x, y: cabeza.y -1};
   serpiente.unshift(nuevaCabeza);
-  serpiente.pop();
+  if(!crecer){
+    serpiente.pop();
+  }
 }
 
-function moverAbajo(){
+function moverAbajo(crecer = false){
   const cabeza= serpiente[0];
   const nuevaCabeza= {x: cabeza.x, y: cabeza.y +1};
   serpiente.unshift(nuevaCabeza);
-  serpiente.pop();
+  if(!crecer){
+    serpiente.pop();
+  }
 }
 
 function moverSerpiente() {
+  let crecer = atrapaComida();
   if(direccionActual === "derecha") {
-    moverDerecha();
+    moverDerecha(crecer);
   }
   if(direccionActual === "izquierda") {
-    moverIzquierda();
+    moverIzquierda(crecer);
   }
   if(direccionActual === "arriba") {
-    moverArriba();
+    moverArriba(crecer);
   }
   if(direccionActual === "abajo") {
-    moverAbajo();
+    moverAbajo(crecer);
   }
-  if(atrapaComida()) {
-  puntaje++;
-  document.getElementById("puntaje").textContent = puntaje;
-  generarComida();
-}
+  if(crecer) {
+    puntaje++;
+    document.getElementById("puntaje").textContent = puntaje;
+    generarComida();
+  }
   dibujarTodo();
 }
 
