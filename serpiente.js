@@ -3,14 +3,15 @@
     const canvas = document.getElementById("canvasJuego");
     const ctx = canvas.getContext("2d");
     const TAMANIO_CELDA = 25;
-    const serpiente=[
+    let serpiente=[
       {x:5, y:5},
       {x:5, y:4},
       {x:4, y:4},
       {x:3, y:4},
       {x:2, y:4}
     ];
-    let intervaloSerpiente
+    let intervaloSerpiente;
+    let velocidad = 300;
     let direccionActual = "derecha";
     let comida = {
       x: 10,
@@ -169,11 +170,21 @@ function moverSerpiente() {
     document.getElementById("puntaje").textContent = puntaje;
     generarComida();
   }
+  if(verificarColision()) {
+  clearInterval(intervaloSerpiente);
+  document.getElementById("estado").textContent =
+  "Perdiste";
+  document.getElementById("mensaje").textContent =
+  "💀 GAME OVER";
+
+  return;
+
+}
   dibujarTodo();
 }
 
 function iniciarJuego(){
- intervaloSerpiente=setInterval(moverSerpiente, 1000);
+ intervaloSerpiente=setInterval(moverSerpiente,velocidad);
 }
 
 function pausarJuego() {
@@ -181,7 +192,33 @@ function pausarJuego() {
 }
 
 function cambiarDireccion(direccion) {
+  if(
+    direccionActual === "derecha" &&
+    direccion === "izquierda"
+  ) {
+    return;
+  }
+  if(
+    direccionActual === "izquierda" &&
+    direccion === "derecha"
+  ) {
+    return;
+  }
+  if(
+    direccionActual === "arriba" &&
+    direccion === "abajo"
+  ) {
+    return;
+  }
+  if(
+    direccionActual === "abajo" &&
+    direccion === "arriba"
+  ) {
+    return;
+  }
+
   direccionActual = direccion;
+
 }
 function dibujarTodo() {
 
@@ -196,6 +233,44 @@ function dibujarTodo() {
 }
 
 function reiniciarJuego() {
-  location.reload();
+  clearInterval(intervaloSerpiente);
+  serpiente=[
+    {x:5, y:5},
+    {x:5, y:4},
+    {x:4, y:4},
+    {x:3, y:4},
+    {x:2, y:4}
+  ];
+  direccionActual = "derecha";
+  puntaje = 0;
+  document.getElementById("puntaje").textContent = puntaje;
+  document.getElementById("estado").textContent = "Listo";
+  document.getElementById("mensaje").textContent = "Presiona Iniciar para comenzar el juego";
+  generarComida();
+  dibujarTodo();
+
 }
 
+function verificarColision() {
+
+  const cabeza = serpiente[0];
+
+  const totalColumnas = canvas.width / TAMANIO_CELDA;
+
+  const totalFilas = canvas.height / TAMANIO_CELDA;
+
+  if(cabeza.x < 0) {
+    return true;
+  }
+  if(cabeza.x >= totalColumnas) {
+    return true;
+  }
+  if(cabeza.y < 0) {
+    return true;
+  }
+  if(cabeza.y >= totalFilas) {
+    return true;
+  }
+  return false;
+
+}
