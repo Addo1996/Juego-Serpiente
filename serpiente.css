@@ -2,33 +2,74 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Orbitron', sans-serif;
 }
 
 body {
+
     min-height: 100vh;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
+
+    background-image:
+    linear-gradient(rgba(0,0,0,0.7),
+    rgba(0,0,0,0.7)),
+    url("https://images.unsplash.com/photo-1511512578047-dfb367046420");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
     color: white;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     padding: 20px;
+
 }
 
 .contenedor-juego {
+
     width: 100%;
+
     max-width: 720px;
-    background: #111827;
-    border-radius: 20px;
+
+    background: rgba(17, 24, 39, 0.88);
+
+    backdrop-filter: blur(10px);
+
+    border-radius: 24px;
+
     padding: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+
+    border: 2px solid #22c55e;
+
+    box-shadow:
+    0 0 25px #22c55e,
+    0 0 60px rgba(34,197,94,0.3);
+
     text-align: center;
+
 }
 
 h1 {
+
     margin-bottom: 10px;
-    font-size: 32px;
+
+    font-size: 42px;
+
     color: #22c55e;
+
+    text-shadow:
+    0 0 10px #22c55e,
+    0 0 25px #22c55e;
+
+    letter-spacing: 3px;
+
 }
 
 .descripcion {
@@ -67,13 +108,25 @@ h1 {
 }
 
 canvas {
+
     width: 100%;
-    max-width: 500px;
-    background: #1e1e1e;
-    border: 4px solid #facc15;
-    border-radius: 16px;
+
+    max-width: 600px;
+
+    background: #020617;
+
+    border: 4px solid #22c55e;
+
+    border-radius: 20px;
+
     display: block;
+
     margin: 0 auto 20px auto;
+
+    box-shadow:
+    0 0 20px #22c55e,
+    0 0 50px rgba(34,197,94,0.4);
+
 }
 
 .controles {
@@ -87,20 +140,43 @@ canvas {
 
 .controles button,
 .acciones button {
+
     border: none;
-    border-radius: 12px;
+
+    border-radius: 14px;
+
     padding: 12px 16px;
-    background: #22c55e;
+
+    background: linear-gradient(
+    135deg,
+    #22c55e,
+    #86efac
+    );
+
     color: #052e16;
+
     font-weight: bold;
+
+    font-size: 16px;
+
     cursor: pointer;
-    transition: 0.2s;
+
+    transition: 0.25s;
+
+    box-shadow:
+    0 0 10px rgba(34,197,94,0.5);
+
 }
 
 .controles button:hover,
 .acciones button:hover {
-    transform: scale(1.05);
-    background: #86efac;
+
+    transform: scale(1.08);
+
+    box-shadow:
+    0 0 20px #22c55e,
+    0 0 40px rgba(34,197,94,0.7);
+
 }
 
 .vacio {
