@@ -192,30 +192,15 @@ function pausarJuego() {
 }
 
 function cambiarDireccion(direccion) {
-  if(
-    direccionActual === "derecha" &&
-    direccion === "izquierda"
-  ) {
-    return;
-  }
-  if(
-    direccionActual === "izquierda" &&
-    direccion === "derecha"
-  ) {
-    return;
-  }
-  if(
-    direccionActual === "arriba" &&
-    direccion === "abajo"
-  ) {
-    return;
-  }
-  if(
-    direccionActual === "abajo" &&
-    direccion === "arriba"
-  ) {
-    return;
-  }
+  if(direccion ==="derecha" && direccionActual === "izquierda")
+    {return;
+    }if(direccion ==="izquierda" && direccionActual === "derecha"){return;
+
+    }if(direccion ==="arriba" && direccionActual === "abajo"){return;
+
+    }if(direccion ==="abajo" && direccionActual === "arriba"){return;
+      
+    }
 
   direccionActual = direccion;
 
